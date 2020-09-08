@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -22,10 +24,14 @@ public class MainActivity extends AppCompatActivity {
 //        double number = 1.999;
 //        double result = Math.floor(number);
         // 5 -> 10
-        for (int i = 0; i <100 ; i++) {
-            double result = Math.floor(Math.random() * 6) + 5;
-            Log.d("BBB",String.valueOf(result));
-        }
+//        double result = Math.floor(Math.random() * 6) + 5;
+//        Log.d("BBB",String.valueOf(result));
+//        Random random = new Random();
+//        for (int i = 0; i <100 ; i++) {
+//            int number = random.nextInt(somax - smin + 1) + smin;
+//            Log.d("BBB",String.valueOf(number));
+//        }
+
 
 
     }
