@@ -23,7 +23,11 @@ public class MainActivity extends AppCompatActivity {
     Button mBtnRandom,mBtnReset,mBtnAddRange;
     TextView mTvKetQua;
     List<Integer> mArrayListRange;
+    String mTextSoMin = "";
+    String mtextSoMax = "";
     String mKetQua = "";
+    int mSMin = 0;
+    int mSMax = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //              Lấy dữ liệu từ edittext
-                String textSoMin = mEdtSoMin.getText().toString();
-                String textSoMax = mEdtSoMax.getText().toString();
+                mTextSoMin = mEdtSoMin.getText().toString();
+                mtextSoMax = mEdtSoMax.getText().toString();
 //              Kiểm tra chuỗi rỗng
-                if (textSoMin.isEmpty() || textSoMax.isEmpty()) {
+                if (mTextSoMin.isEmpty() || mtextSoMax.isEmpty()) {
                     Toast.makeText(
                             MainActivity.this,
                             "Bạn chưa nhập đủ thông tin",
@@ -55,19 +59,19 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 //              Chuyển dữ liệu thành số
-                int sMin = Integer.parseInt(textSoMin);
-                int sMax = Integer.parseInt(textSoMax);
+                mSMin = Integer.parseInt(mTextSoMin);
+                mSMax = Integer.parseInt(mtextSoMax);
 
 //              Kiểm tra số min không được hơn hoặc bằng số max
-                if (sMin >= sMax){
-                    sMax = sMin + 1;
+                if (mSMin >= mSMax){
+                    mSMax = mSMin + 1;
                 }
-                mEdtSoMax.setText(String.valueOf(sMax));
-                mEdtSoMin.setText(String.valueOf(sMin));
+                mEdtSoMax.setText(String.valueOf(mSMax));
+                mEdtSoMin.setText(String.valueOf(mSMin));
 
                 mArrayListRange.clear();
 
-                for (int i = sMin; i <= sMax ; i++) {
+                for (int i = mSMin; i <= mSMax ; i++) {
                     mArrayListRange.add(i);
                 }
 
