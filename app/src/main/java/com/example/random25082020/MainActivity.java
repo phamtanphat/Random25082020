@@ -20,8 +20,9 @@ import java.util.Vector;
 public class MainActivity extends AppCompatActivity {
 
     EditText mEdtSoMin, mEdtSoMax;
-    Button mBtnRandom;
+    Button mBtnRandom,mBtnReset,mBtnAddRange;
     TextView mTvKetQua;
+    List<Integer> mArrayListRange;
     String mKetQua = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +33,13 @@ public class MainActivity extends AppCompatActivity {
         mEdtSoMin = findViewById(R.id.edtSomin);
         mBtnRandom = findViewById(R.id.btnRandom);
         mTvKetQua = findViewById(R.id.tvKetqua);
+        mBtnReset = findViewById(R.id.btnReset);
+        mBtnAddRange = findViewById(R.id.btnAddRange);
 
-        //ctrl + p : xem tham số truyền vào
-        // Annotation : chú thích
+//        leak memory : Vùng nhớ không được kiểm soát
+        mArrayListRange = new ArrayList<>();
 
-        List<Integer> arrNums = new ArrayList<>();
-        // Them dữ liệu
-        arrNums.add(1); //index = 0
-        arrNums.add(2); //index = 1
-        arrNums.add(3); //index = 2
-        // Xóa dữ liệu
-        arrNums.remove(0);
-        // Cập nhật dữ liệu
-        arrNums.set(0 , 5);
-
-        mBtnRandom.setOnClickListener(new View.OnClickListener() {
+        mBtnAddRange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //              Lấy dữ liệu từ edittext
@@ -68,16 +61,31 @@ public class MainActivity extends AppCompatActivity {
 //              Kiểm tra số min không được hơn hoặc bằng số max
                 if (sMin >= sMax){
                     sMax = sMin + 1;
-
                 }
                 mEdtSoMax.setText(String.valueOf(sMax));
                 mEdtSoMin.setText(String.valueOf(sMin));
 
-                // random
-                Random random = new Random();
-                int value = random.nextInt(sMax - sMin + 1) + sMin;
-                mKetQua += value + " - ";
-                mTvKetQua.setText(mKetQua);
+                mArrayListRange.clear();
+
+                for (int i = sMin; i <= sMax ; i++) {
+                    mArrayListRange.add(i);
+                }
+
+                Log.d("BBB",mArrayListRange.size() + "");
+
+            }
+        });
+
+        mBtnRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+//                // random
+//                Random random = new Random();
+//                int value = random.nextInt(sMax - sMin + 1) + sMin;
+//                mKetQua += value + " - ";
+//                mTvKetQua.setText(mKetQua);
             }
         });
     }
