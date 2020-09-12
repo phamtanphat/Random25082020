@@ -85,14 +85,24 @@ public class MainActivity extends AppCompatActivity {
                 disableView(mBtnAddRange);
                 disableView(mEdtSoMax);
                 disableView(mEdtSoMin);
+                enableView(mBtnRandom);
             }
         });
         mBtnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 1 : clear mArrayListRange , setEdittext lại thành chuỗi rỗng
-                // 2 : Bật tính năng lại cho edt , btnAddRange , btn Random
-                // 3 : setText cho kết quả nếu kết quả có tồn tại
+                mArrayListRange.clear();
+                mEdtSoMin.setText("");
+                mEdtSoMax.setText("");
+                // 2 : Bật tính năng lại cho edt , btnAddRange
+                enableView(mEdtSoMin);
+                enableView(mEdtSoMax);
+                enableView(mBtnAddRange);
+                // 3 : Ẩn tính năng random
+                disableView(mBtnRandom);
+                // 4 : setText cho kết quả nếu kết quả có tồn tại
+
             }
         });
 
