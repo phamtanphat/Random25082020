@@ -75,16 +75,12 @@ public class MainActivity extends AppCompatActivity {
                     mArrayListRange.add(i);
                 }
 
-                Log.d("BBB",mArrayListRange.size() + "");
-
             }
         });
 
         mBtnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 //                // random
 //                Random random = new Random();
 //                int value = random.nextInt(sMax - sMin + 1) + sMin;
@@ -92,5 +88,19 @@ public class MainActivity extends AppCompatActivity {
 //                mTvKetQua.setText(mKetQua);
             }
         });
+        // Hàm :
+        //   + Tái sử dụng lại code
+        //   + Dễ sử dụng
     }
+    // private : Phạm vi hoạt động
+    // void : Giá trị trả về (void là kiểu dữ liệu đặc biệt không cần trả về)
+    // enableView : tên phương thức
+    // trong () : tham số truyền vào
+    private void enableView(View v){
+        v.setEnabled(true);
+    }
+    private void disableView(View v){
+        v.setEnabled(false);
+    }
+
 }
