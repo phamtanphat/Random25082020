@@ -29,10 +29,11 @@ public class MainActivity extends AppCompatActivity {
     String mTextSoMin = "";
     String mtextSoMax = "";
     String mKetQua = "";
+    Random mRandom;
     int mSMin = 0;
     int mSMax = 0;
-    LinearLayout linearLayout;
-
+    int mIndexRandom = -1;
+    int mValueRandom = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        leak memory : Vùng nhớ không được kiểm soát
         mArrayListRange = new ArrayList<>();
+        mRandom = new Random();
 
         disableView(mBtnRandom);
 
@@ -109,11 +111,16 @@ public class MainActivity extends AppCompatActivity {
         mBtnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                // random
-//                Random random = new Random();
-//                int value = random.nextInt(sMax - sMin + 1) + sMin;
-//                mKetQua += value + " - ";
-//                mTvKetQua.setText(mKetQua);
+                if (mArrayListRange.size() > 0){
+                    mIndexRandom = mRandom.nextInt(mArrayListRange.size());
+                    mValueRandom = mArrayListRange.get(mIndexRandom);
+                    mKetQua += mValueRandom + " - ";
+                    mTvKetQua.setText(mKetQua);
+                    mArrayListRange.remove(mIndexRandom);
+                }else{
+                    Toast.makeText(MainActivity.this, "Het gia tri random", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
