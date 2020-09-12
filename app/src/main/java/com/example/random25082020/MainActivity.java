@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 if (mArrayListRange.size() > 0){
                     mIndexRandom = mRandom.nextInt(mArrayListRange.size());
                     mValueRandom = mArrayListRange.get(mIndexRandom);
-                    mKetQua += mValueRandom + " - ";
+                    mKetQua += mArrayListRange.size() != 1 ? mValueRandom + " - " : mValueRandom;
                     mTvKetQua.setText(mKetQua);
                     mArrayListRange.remove(mIndexRandom);
                 }else{
