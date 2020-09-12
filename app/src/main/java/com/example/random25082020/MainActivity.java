@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +23,7 @@ import java.util.Vector;
 public class MainActivity extends AppCompatActivity {
 
     EditText mEdtSoMin, mEdtSoMax;
-    Button mBtnRandom,mBtnReset,mBtnAddRange;
+    Button mBtnRandom, mBtnReset, mBtnAddRange;
     TextView mTvKetQua;
     List<Integer> mArrayListRange;
     String mTextSoMin = "";
@@ -28,10 +31,13 @@ public class MainActivity extends AppCompatActivity {
     String mKetQua = "";
     int mSMin = 0;
     int mSMax = 0;
+    LinearLayout linearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // Ánh xạ
         mEdtSoMax = findViewById(R.id.edtSomax);
         mEdtSoMin = findViewById(R.id.edtSomin);
@@ -42,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        leak memory : Vùng nhớ không được kiểm soát
         mArrayListRange = new ArrayList<>();
+
+        disableView(mBtnRandom);
 
         mBtnAddRange.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 mSMax = Integer.parseInt(mtextSoMax);
 
 //              Kiểm tra số min không được hơn hoặc bằng số max
-                if (mSMin >= mSMax){
+                if (mSMin >= mSMax) {
                     mSMax = mSMin + 1;
                 }
                 mEdtSoMax.setText(String.valueOf(mSMax));
@@ -71,10 +79,20 @@ public class MainActivity extends AppCompatActivity {
 
                 mArrayListRange.clear();
 
-                for (int i = mSMin; i <= mSMax ; i++) {
+                for (int i = mSMin; i <= mSMax; i++) {
                     mArrayListRange.add(i);
                 }
-
+                disableView(mBtnAddRange);
+                disableView(mEdtSoMax);
+                disableView(mEdtSoMin);
+            }
+        });
+        mBtnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 1 : clear mArrayListRange , setEdittext lại thành chuỗi rỗng
+                // 2 : Bật tính năng lại cho edt , btnAddRange , btn Random
+                // 3 : setText cho kết quả nếu kết quả có tồn tại
             }
         });
 
@@ -88,18 +106,20 @@ public class MainActivity extends AppCompatActivity {
 //                mTvKetQua.setText(mKetQua);
             }
         });
-        // Hàm :
-        //   + Tái sử dụng lại code
-        //   + Dễ sử dụng
     }
+    // Hàm :
+    //   + Tái sử dụng lại code
+    //   + Dễ sử dụng
+
     // private : Phạm vi hoạt động
     // void : Giá trị trả về (void là kiểu dữ liệu đặc biệt không cần trả về)
     // enableView : tên phương thức
     // trong () : tham số truyền vào
-    private void enableView(View v){
+    private void enableView(View v) {
         v.setEnabled(true);
     }
-    private void disableView(View v){
+
+    private void disableView(View v) {
         v.setEnabled(false);
     }
 
